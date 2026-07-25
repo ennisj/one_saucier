@@ -1,0 +1,113 @@
+One Saucier - Third-Party Notices
+=================================
+
+One Saucier (the on-device downloader cart for the AtGames Legends Ultimate
+and its Windows desktop build) is closed-source software. It incorporates and
+redistributes the third-party components listed below. Full license texts are
+in the licenses/ folder that accompanies this file (also present inside the
+cart's .uce image and in the Windows build folder).
+
+Questions: open an issue at https://github.com/ennisj/one_saucier
+
+
+Compiled into the One Saucier binaries
+--------------------------------------
+* Dear ImGui v1.91.5 - MIT License
+  Copyright (c) 2014-2024 Omar Cornut - https://github.com/ocornut/imgui
+  Text: licenses/ImGui-MIT.txt
+
+* miniz - MIT License
+  Copyright 2013-2014 RAD Game Tools and Valve Software
+  Copyright 2010-2014 Rich Geldreich and Tenacious Software LLC
+  https://github.com/richgel999/miniz
+  Text: licenses/miniz-MIT.txt
+
+* stb_image v2.30 - public domain (Unlicense dedication, used as such)
+  by Sean Barrett - https://github.com/nothings/stb
+
+* MD5 implementation - public domain
+  by Alexander Peslyak (Solar Designer), 2001
+
+* GCC runtime bits (libstdc++/libgcc, statically linked; on Windows also
+  mingw-w64 winpthread) - GPL with the GCC Runtime Library Exception /
+  mingw-w64 permissive licenses. The exception permits this use.
+
+
+FFmpeg (video playback) - LGPL-2.1-or-later
+-------------------------------------------
+Both builds link FFmpeg 6.1.2 DYNAMICALLY; no GPL or non-free FFmpeg
+components are enabled or shipped. Text: licenses/LGPL-2.1.txt
+
+Because linking is dynamic, you may replace these libraries with your own
+compatible FFmpeg build (LGPL section 6): on the cart, swap the libav*/libsw*
+.so files inside the .uce's lib32/; on Windows, swap the av*/sw* DLLs next to
+the exe.
+
+* Device cart: shared armhf libraries built from the UNMODIFIED source at
+  https://ffmpeg.org/releases/ffmpeg-6.1.2.tar.xz
+  using the Bootlin armv7-eabihf glibc-2.31 stable 2020.08-1 toolchain
+  (https://toolchains.bootlin.com) and this exact configuration:
+
+    ./configure --enable-cross-compile --cross-prefix=<toolchain>/bin/arm-linux- \
+      --arch=armv7 --cpu=cortex-a53 --target-os=linux --prefix=<out> \
+      --enable-shared --disable-static --disable-programs --disable-doc \
+      --disable-network --disable-autodetect --disable-everything \
+      --enable-decoder=h264,hevc,mpeg4,mpeg2video,mjpeg,png,vp8,vp9,aac,mp3,ac3,pcm_s16le \
+      --enable-demuxer=mov,avi,matroska \
+      --enable-parser=h264,hevc,aac,mpeg4video,mpegvideo,mpegaudio,mjpeg,png,ac3,vp8,vp9 \
+      --enable-protocol=file --enable-swscale --enable-swresample --enable-neon \
+      --extra-cflags="-O2 -D_FILE_OFFSET_BITS=64"
+
+* Windows: unmodified DLLs from BtbN's FFmpeg-Builds "win64-lgpl-shared"
+  package; corresponding sources are published with each release at
+  https://github.com/BtbN/FFmpeg-Builds/releases
+
+
+glibc components (device cart) - LGPL-2.1-or-later
+--------------------------------------------------
+The cart bundles libnss_dns, libnss_files and libresolv from glibc 2.31
+(unmodified, as built by the Bootlin toolchain above) because the device's
+own image lacks working copies. Source: https://ftp.gnu.org/gnu/libc/
+(glibc-2.31) or via https://toolchains.bootlin.com.
+Text: licenses/LGPL-2.1.txt
+
+
+Fonts
+-----
+* Roboto Regular - Apache License 2.0
+  Copyright 2011 Google Inc. (designed by Christian Robertson)
+  Text: licenses/Apache-2.0.txt
+
+
+Data files
+----------
+* Mozilla CA certificate bundle (cacert.pem in the cart,
+  curl-ca-bundle.crt on Windows) - MPL-2.0 -
+  https://curl.se/docs/caextract.html - Text: licenses/MPL-2.0.txt
+
+* SDL_GameControllerDB (gamecontrollerdb.txt) - zlib license -
+  https://github.com/mdqinc/SDL_GameControllerDB -
+  Text: licenses/SDL_GameControllerDB-LICENSE.txt
+
+
+Windows build runtime
+---------------------
+* SDL2.dll - zlib license - https://libsdl.org
+* libcurl-x64.dll (curl-for-win) - curl license (licenses/curl-COPYING.txt),
+  with statically embedded dependencies (TLS, compression, HTTP/2/3 support);
+  the license files shipped inside the curl-for-win package are staged in
+  licenses/curl-for-win/ alongside the Windows build.
+
+
+Device cart runtime libraries
+-----------------------------
+The cart (.uce) bundles a subset of the runtime libraries from the
+OnesaUCE / AtGames Legends Ultimate device image, so the app can run from a
+noexec USB drive on hardware the user already owns. These are unmodified
+copies of files present on every target device, including: SDL2 (zlib),
+libcurl (curl license), OpenSSL, ALSA (LGPL-2.1, source:
+https://www.alsa-project.org), glibc runtime components (LGPL-2.1, source:
+https://ftp.gnu.org/gnu/libc/), and the Rockchip/ARM Mali GPU userspace for
+the rk3328 board (proprietary). Also reused, with the OnesaUCE project's
+permission: its script-runner core (core.so) and sudo helper binary (sudo is
+distributed under an ISC-style license, https://www.sudo.ws/about/license/).
