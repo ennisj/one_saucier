@@ -89,13 +89,41 @@ Settings screen.
 
 ### macOS
 
+The app is a universal binary — it runs natively on both Apple Silicon and
+Intel Macs, on **macOS 11 (Big Sur) or later**.
+
 1. Download the macOS package (available from v0.2.0 onward) and unpack it.
-2. Move `one_saucier.app` wherever you like (Applications works) and open it.
-   The app isn't signed with an Apple Developer ID yet, so the first launch
-   needs a nudge: right-click ▸ **Open**, or approve it under **System
-   Settings ▸ Privacy & Security ▸ Open Anyway**. Requires macOS 11 or later.
+2. Move `one_saucier.app` wherever you like — **Applications** works — and
+   open it (see the first-launch note below).
 3. The app keeps its settings, logs, and downloads in
    `~/Library/Application Support/one_saucier`.
+
+Because the app isn't signed with a paid Apple certificate yet, macOS shows a
+security warning the **first time** you open it. This is expected, and you
+only need to get past it once.
+
+**On macOS 15 Sequoia and newer:**
+
+1. Double-click the app. When macOS says it can't be opened because Apple
+   cannot verify it, click **Done** (do *not* click "Move to Trash").
+2. Open the **Apple menu ▸ System Settings ▸ Privacy & Security**.
+3. Scroll to the **Security** section, find the line saying *"one_saucier"
+   was blocked*, and click **Open Anyway**.
+4. Confirm with Touch ID or your password, then click **Open Anyway** once
+   more. The app launches and won't ask again.
+
+**On macOS 11 Big Sur through 14 Sonoma**, the quicker method works instead:
+right-click (or Control-click) the app and choose **Open**, then **Open**
+again.
+
+**If you see "one_saucier is damaged and can't be opened"**, that is the
+download-quarantine flag, not actual damage. Open the **Terminal** app, paste
+the line below (adjusting the path if the app isn't in Applications), press
+Return, then open the app normally:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/one_saucier.app
+```
 
 ## Signing in
 
