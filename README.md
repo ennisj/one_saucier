@@ -11,9 +11,9 @@ onto the drive it's running from, no PC required — and since v0.2.0 it also
 ships as **Windows and macOS apps** that can manage a local library and pair
 with your cabinet over your home network.
 
-<p align="center">
-  <img src="docs/Home_Screen.jpg" alt="Home screen" width="900">
-</p>
+**Current release: v0.4.0** — see the
+[releases page](https://github.com/ennisj/one_saucier/releases) for what's
+new in each version.
 
 ## Features
 
@@ -21,6 +21,15 @@ with your cabinet over your home network.
 
 - **Browse the full OnesaUCE catalog** — base build, 75+ game packs, videos,
   and themes, with live install status for every component
+- **Install single games and videos** — open a System Pack or video
+  collection to see its individual games, their sizes, and their install
+  state, then install or remove them one at a time; each collection's shared
+  files download once as its Component Base, so every game after that costs
+  only its own few megabytes
+- **Live theme preview** — the THEMES tab shows every installed cabinet
+  theme full-screen, drawn by the same engine the cabinet uses: animations,
+  music, and game videos included. Browse collections inside the preview and
+  apply the theme right from it
 - **Browse your installed library** — the BROWSE tab shows your games with
   their marquees, logos, story text, artwork, and videos, right on the cabinet
 - **Parallel downloads** — up to 8 components at once, each with pause,
@@ -53,12 +62,13 @@ with your cabinet over your home network.
 
 **On your PC or Mac**
 
-- The same app, windowed and resizable, driven by keyboard or gamepad
+- The same app, windowed and resizable, driven by keyboard, mouse, or gamepad
 - Browse the catalog, download components, and keep copies in a local library
   folder for later
 - **Pair with your cabinet** (Settings ▸ Cabinet Link) to see each
   component's install status on the cabinet and **send content straight to it
-  over your home network** — no drive shuffling
+  over your home network** — no drive shuffling, down to a single game or
+  video at a time
 
 ## Installation
 
@@ -132,17 +142,9 @@ credentials — with the on-screen keyboard on the cabinet, or just by typing
 on the desktop versions. **Validate** checks them against Archive.org and
 stores them with the app's settings — you stay signed in across launches.
 
-<p align="center">
-  <img src="docs/Sign_In_Keyboard.jpg" alt="On-screen keyboard sign-in" width="900">
-</p>
-
 Settings also holds the download options: auto-install after download, resume
 partials on start, how many components download in parallel, and optional
 backups of files an update overwrites.
-
-<p align="center">
-  <img src="docs/Settings_Screen.jpg" alt="Settings screen" width="900">
-</p>
 
 ## Browsing and installing
 
@@ -150,10 +152,6 @@ The **Catalog** lists every component grouped by category, with its size, the
 available version, your installed version, and a colour-coded status — sort
 it by any column or filter it by status. One Saucier itself is the first row —
 it updates like everything else.
-
-<p align="center">
-  <img src="docs/Catalog_Screen_1.jpg" alt="Catalog screen" width="900">
-</p>
 
 Select a component with **A** and confirm to download and install it. Pick
 several — they queue up and download in parallel while installs run one at a
@@ -169,10 +167,6 @@ time in the background. The status column tracks every state:
 | **Paused** | Stopped by you; resumes where it left off |
 | **Ready to Install** | Downloaded but not yet installed (kept across restarts) |
 | **Pending Restart** | A One Saucier update is installed; restarts into the new version |
-
-<p align="center">
-  <img src="docs/Catalog_Screen_2.jpg" alt="Catalog install states" width="900">
-</p>
 
 The **Menu** button opens contextual options wherever you are: install,
 uninstall, or force re-download the selected component, pause / resume /
@@ -212,6 +206,7 @@ release on the [releases page](https://github.com/ennisj/one_saucier/releases).
 | Z / C | Page up / page down (Catalog, What's New, Log) |
 | Menu | Contextual options |
 | Rewind / B | Close dialog; quit (from Home) |
+| Trackball | Point and click — rows, tabs, controls, video scrubbing |
 
 On the sign-in keyboard: **A** types the highlighted key, **P1** is Enter,
 **X** shift, **B** space, **C** backspace, **Rewind** cancels.
