@@ -108,6 +108,6 @@ copies of files present on every target device, including: SDL2 (zlib),
 libcurl (curl license), OpenSSL, ALSA (LGPL-2.1, source:
 https://www.alsa-project.org), glibc runtime components (LGPL-2.1, source:
 https://ftp.gnu.org/gnu/libc/), and the Rockchip/ARM Mali GPU userspace for
-the rk3328 board (proprietary). Also reused, with the OnesaUCE project's
+the rk3328, rk3399 and rk3588 boards (proprietary). Also reused, with the OnesaUCE project's
 permission: its script-runner core (core.so) and sudo helper binary (sudo is
 distributed under an ISC-style license, https://www.sudo.ws/about/license/).
