@@ -2,10 +2,11 @@ One Saucier - Third-Party Notices
 =================================
 
 One Saucier (the on-device downloader cart for the AtGames Legends Ultimate
-and its Windows desktop build) is closed-source software. It incorporates and
-redistributes the third-party components listed below. Full license texts are
-in the licenses/ folder that accompanies this file (also present inside the
-cart's .uce image and in the Windows build folder).
+and its Windows and macOS desktop builds) is closed-source software. It
+incorporates and redistributes the third-party components listed below. Full
+license texts are in the licenses/ folder that accompanies this file (also
+present inside the cart's .uce image, in the Windows build folder and in the
+macOS app's Contents/Resources/).
 
 Questions: open an issue at https://github.com/ennisj/one_saucier
 
@@ -28,6 +29,9 @@ Compiled into the One Saucier binaries
 * MD5 implementation - public domain
   by Alexander Peslyak (Solar Designer), 2001
 
+* LZMA SDK 23.01 (the 7z decoder; extraction only) - public domain
+  by Igor Pavlov - https://github.com/ip7z/7zip (tag 23.01)
+
 * GCC runtime bits (libstdc++/libgcc, statically linked; on Windows also
   mingw-w64 winpthread) - GPL with the GCC Runtime Library Exception /
   mingw-w64 permissive licenses. The exception permits this use.
@@ -35,13 +39,15 @@ Compiled into the One Saucier binaries
 
 FFmpeg (video playback) - LGPL-2.1-or-later
 -------------------------------------------
-Both builds link FFmpeg 6.1.2 DYNAMICALLY; no GPL or non-free FFmpeg
-components are enabled or shipped. Text: licenses/LGPL-2.1.txt
+Every build links FFmpeg DYNAMICALLY; no GPL or non-free FFmpeg components
+are enabled or shipped. Text: licenses/LGPL-2.1.txt
 
 Because linking is dynamic, you may replace these libraries with your own
 compatible FFmpeg build (LGPL section 6): on the cart, swap the libav*/libsw*
 .so files inside the .uce's lib32/; on Windows, swap the av*/sw* DLLs next to
-the exe.
+the exe; on macOS, swap the libav*/libsw* dylibs in
+one_saucier.app/Contents/Frameworks/ (then re-sign the app ad hoc:
+codesign --force --deep -s - one_saucier.app).
 
 * Device cart: shared armhf libraries built from the UNMODIFIED source at
   https://ffmpeg.org/releases/ffmpeg-6.1.2.tar.xz
@@ -61,6 +67,14 @@ the exe.
 * Windows: unmodified DLLs from BtbN's FFmpeg-Builds "win64-lgpl-shared"
   package; corresponding sources are published with each release at
   https://github.com/BtbN/FFmpeg-Builds/releases
+
+* macOS: shared libraries (arm64 + x86_64) built with Apple clang from the
+  UNMODIFIED source at https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz
+  with this configuration (the Intel slice adds --enable-cross-compile
+  --arch=x86_64 --target-os=darwin --cc="clang -arch x86_64"):
+
+    ./configure --prefix=<out> --enable-shared --disable-static \
+      --disable-programs --disable-doc --disable-autodetect --enable-zlib
 
 
 glibc components (device cart) - LGPL-2.1-or-later
@@ -97,6 +111,13 @@ Windows build runtime
   with statically embedded dependencies (TLS, compression, HTTP/2/3 support);
   the license files shipped inside the curl-for-win package are staged in
   licenses/curl-for-win/ alongside the Windows build.
+
+
+macOS build runtime
+-------------------
+* libSDL2-2.0.0.dylib (SDL 2.30.10, built from the unmodified source) -
+  zlib license - https://libsdl.org
+* libcurl is the system's own (/usr/lib/libcurl.4.dylib); it is not shipped.
 
 
 Device cart runtime libraries
